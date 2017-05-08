@@ -1,0 +1,43 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<!--<link rel="import" href="../polymer/lib/elements/dom-if.html">-->
+<!--<link rel="import" href="../polymer/lib/elements/dom-repeat.html">-->
+ <script src="/QrCode.min.js"></script>
+
+<!--
+`qrcode-scanner`
+
+
+@demo demo/index.html
+-->
+
+<dom-module id="qrcode-scanner">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>Hello [[prop1]]!</h2>
+  </template>
+
+  <script>
+    /** @polymerElement */
+    class QrcodeScanner extends Polymer.Element {
+      static get is() { return 'qrcode-scanner'; }
+      static get properties() {
+        return {
+          data: {
+            type: String,
+            notify: true
+          }
+        };
+      }
+      
+      connectedCallback(){
+        super.connectedCallback();
+        console.log(QrCode)
+      }
+
+    } window.customElements.define(QrcodeScanner.is, QrcodeScanner);
+  </script>
+</dom-module>
