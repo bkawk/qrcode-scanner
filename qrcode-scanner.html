@@ -1,7 +1,7 @@
 <link rel="import" href="../polymer/polymer-element.html">
 <!--<link rel="import" href="../polymer/lib/elements/dom-if.html">-->
 <!--<link rel="import" href="../polymer/lib/elements/dom-repeat.html">-->
- <script src="/QrCode.min.js"></script>
+<script src="jsqrcode.js"></script>
 
 <!--
 `qrcode-scanner`
@@ -16,8 +16,20 @@
       :host {
         display: block;
       }
+
+      #myCanvas{
+        background-color:lime;
+        filter:brightness(200%);
+        filter: contrast(5%);
+        filter: grayscale(1);
+      }
+      [hide] {
+          display: none !important;
+      }
+
     </style>
-    <h2>Hello [[prop1]]!</h2>
+    <video id="myVideo" width="320" height="240" autoplay></video>
+    <canvas id="myCanvas" width="640" height="480" ></canvas>
   </template>
 
   <script>
@@ -35,7 +47,55 @@
       
       connectedCallback(){
         super.connectedCallback();
-        console.log(QrCode)
+        this._openCamera(); 
+      }
+
+      _openCamera(){
+        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+        if (navigator.getUserMedia) {
+            navigator.getUserMedia({ audio: false, video: true },(stream) => {
+              var video = this.$.myVideo;
+              video.srcObject = stream;
+              video.onloadedmetadata = (e) => {
+                this.$.myVideo.play();
+                this._startScan()
+              };
+            },
+            function(err) {
+              console.log(err.name);
+            }
+          );
+        } else {
+          console.log("getUserMedia not supported");
+        }
+      }
+
+      _startScan(){
+        this.scan = setInterval(()=>{ 
+          this._scan()
+        }, 20);     
+      }
+
+      _scan(){
+        var width = 640
+        var height = 480
+        var video = this.$.myVideo;
+        var canvas = this.$.myCanvas;
+        var context = canvas.getContext("2d");
+        context.clearRect(0, 0, width, height);
+        context.drawImage(video, 0, 0, width, height);
+        try{
+          var result = qrcode.decode("",this.$.myCanvas);
+          this._result(result)
+        }catch(err){
+          return
+        }
+
+      }
+
+      _result(result){
+        clearInterval(this.scan);
+        console.log(result)
       }
 
     } window.customElements.define(QrcodeScanner.is, QrcodeScanner);
