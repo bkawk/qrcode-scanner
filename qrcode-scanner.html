@@ -55,7 +55,7 @@
 
     </style>
     <div id="border"></div>
-
+    <audio id="audio" src="beep.mp3" autostart="false" ></audio>
     <video id="myVideo" width="320" height="240" autoplay muted></video>
     <canvas id="myCanvas" width="640" height="480" hide></canvas>
   </template>
@@ -122,6 +122,7 @@
       }
 
       _result(result){
+        this.$.audio.play();
         clearInterval(this.scan);
         this.data = result;
       }
