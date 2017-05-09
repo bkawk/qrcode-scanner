@@ -12,9 +12,15 @@
                 <use fill-opacity="0.5" fill="#000000" fill-rule="evenodd" xlink:href="#path-1"></use>
                 <path stroke="#979797" stroke-width="1" d="M0.5,0.5 L413.5,0.5 L413.5,735.5 L0.5,735.5 L0.5,0.5 Z M31.5,193 L31.5,543 L31.5,543.5 L32,543.5 L382,543.5 L382.5,543.5 L382.5,543 L382.5,193 L382.5,192.5 L382,192.5 L32,192.5 L31.5,192.5 L31.5,193 Z"></path>
             </g>
+            <g id="Group" transform="translate(20.000000, 181.000000)" fill-rule="nonzero" fill="#85FF00">
+                <path d="M11.789,339.561 L0.908,339.561 L0.908,367.56 C0.908,370.565 3.343,373 6.348,373 L34.347,373 L34.347,362.119 L11.789,362.119 L11.789,339.561 Z" id="Shape"></path>
+                <path d="M362.211,362.119 L339.652,362.119 L339.652,373 L367.651,373 C370.656,373 373.091,370.564 373.091,367.56 L373.091,339.561 L362.211,339.561 L362.211,362.119 Z" id="Shape"></path>
+                <path d="M367.651,0.816 L339.652,0.816 L339.652,11.697 L362.211,11.697 L362.211,34.255 L373.092,34.255 L373.092,6.257 C373.092,3.252 370.656,0.816 367.651,0.816 Z" id="Shape"></path>
+                <path d="M0.908,6.257 L0.908,6.267 L0.908,34.256 L11.79,34.256 L11.79,11.697 L34.348,11.697 L34.348,0.816 L6.349,0.816 C3.344,0.816 0.908,3.252 0.908,6.257 Z" id="Shape"></path>
+            </g>
             <text id="Align-the-QR-code-wi" font-family="HelveticaNeue, Helvetica Neue" font-size="17" font-weight="normal" line-spacing="21" letter-spacing="0.219999999" fill="#FFFFFF">
-                <tspan x="48" y="577">Align the QR code with the frame to sca</tspan>
-                <tspan x="359.486" y="577" letter-spacing="4.21999979">n</tspan>
+                <tspan x="48" y="597">Align the QR code with the frame to sca</tspan>
+                <tspan x="359.486" y="597" letter-spacing="4.21999979">n</tspan>
             </text>
         </g>
     </g>
