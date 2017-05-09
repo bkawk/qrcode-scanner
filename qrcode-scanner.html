@@ -55,7 +55,6 @@
 
     </style>
     <div id="border"></div>
-    <audio id="audio" src="beep.mp3" autostart="false" ></audio>
     <video id="myVideo" width="320" height="240" autoplay muted></video>
     <canvas id="myCanvas" width="640" height="480" hide></canvas>
   </template>
@@ -75,15 +74,16 @@
       
       connectedCallback(){
         super.connectedCallback();
-        this._openCamera(); 
+        this.openCamera(); 
       }
 
-      _openCamera(){
+      openCamera(){
         navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
         if (navigator.getUserMedia) {
             navigator.getUserMedia({ audio: false, video: true },(stream) => {
+              this.stream = stream
               var video = this.$.myVideo;
-              video.srcObject = stream;
+              video.srcObject = this.stream;
               video.onloadedmetadata = (e) => {
                 this.$.myVideo.play();
                 this._startScan()
@@ -100,7 +100,7 @@
 
       _startScan(){
         this.scan = setInterval(()=>{ 
-          this._scan()
+          this._scan()                  
         }, 200);     
       }
 
@@ -118,13 +118,17 @@
         }catch(err){
           return
         }
-
       }
 
       _result(result){
-        this.$.audio.play();
         clearInterval(this.scan);
         this.data = result;
+      }
+
+      disconnect(){
+        this.stream.getVideoTracks().forEach(function (track) {
+            track.stop();
+        });
       }
 
     } window.customElements.define(QrcodeScanner.is, QrcodeScanner);
