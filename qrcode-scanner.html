@@ -1,7 +1,7 @@
 <link rel="import" href="../polymer/polymer-element.html">
 <!--<link rel="import" href="../polymer/lib/elements/dom-if.html">-->
 <!--<link rel="import" href="../polymer/lib/elements/dom-repeat.html">-->
-<script src="jsqrcode.js"></script>
+<script src="jsqrcode.min.js"></script>
 
 <!--
 `qrcode-scanner`
@@ -26,10 +26,38 @@
       [hide] {
           display: none !important;
       }
+      #myVideo{
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        min-width: 100%;
+        min-height: 100%;
+        width: auto;
+        height: auto;
+        z-index: -100;
+        -ms-transform: translateX(-50%) translateY(-50%);
+        -moz-transform: translateX(-50%) translateY(-50%);
+        -webkit-transform: translateX(-50%) translateY(-50%);
+        transform: translateX(-50%) translateY(-50%);
+      }
+      #border{
+        position: fixed;
+        top: 0%;
+        left: 0%;
+        min-width: 100%;
+        width: auto;
+        min-height: 100%;
+        height: auto;
+        background-image: url("qrscan.svg");
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
 
     </style>
-    <video id="myVideo" width="320" height="240" autoplay></video>
-    <canvas id="myCanvas" width="640" height="480" ></canvas>
+    <div id="border"></div>
+
+    <video id="myVideo" width="320" height="240" autoplay muted></video>
+    <canvas id="myCanvas" width="640" height="480" hide></canvas>
   </template>
 
   <script>
@@ -73,7 +101,7 @@
       _startScan(){
         this.scan = setInterval(()=>{ 
           this._scan()
-        }, 20);     
+        }, 200);     
       }
 
       _scan(){
@@ -95,7 +123,7 @@
 
       _result(result){
         clearInterval(this.scan);
-        console.log(result)
+        this.data = result;
       }
 
     } window.customElements.define(QrcodeScanner.is, QrcodeScanner);
